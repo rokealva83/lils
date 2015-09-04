@@ -1,0 +1,126 @@
+{% extends 'core/base.html' %}
+
+{% load i18n %}
+{% load pipeline %}
+
+{% block title %}
+    {% if paths %}
+        {% for parent_name, parent_instance in paths.items %}
+            {{ parent_instance }}
+            >
+        {% endfor %}
+    {% endif %}
+    {{ header }}
+{% endblock title %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>{{ header }}</h2>
+
+        <div id="toolbar" class="pull-right">
+
+            {% block toolbar %}
+
+                {% if object_list %}
+                    <button id="searchCollapseButton"
+                            class="btn btn-default"
+                            data-toggle="collapse"
+                            href="#searchCollapse"
+                            aria-expanded="false"
+                            aria-controls="#searchCollapse">
+                        <span class="glyphicon glyphicon-search"></span>
+                        {% trans "Search" %}
+                    </button>
+                {% endif %}
+
+                <a href="{{ create_url }}" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span>
+
+                    {% trans 'New' %} {{ verbose_name }}
+                </a>
+
+                {% if user.is_superuser and parent %}
+                    <a href="{{ parent.get_delete_url }}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        {% trans 'Delete' %} <b>{{ parent }}</b>
+                    </a>
+                {% endif %}
+            {% endblock toolbar %}
+        </div>
+    </div>
+
+    {% if paths %}
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'customer-list' %}">
+                    {% trans 'Customers' %}
+                </a>
+            </li>
+            {% for parent_name, parent_instance in paths.items %}
+                <li>
+                    <a href="{{ parent_instance.get_absolute_url }}">
+                        {{ parent_instance }}
+                    </a>
+                </li>
+            {% endfor %}
+            <li class="active">
+                {{ header }}
+            </li>
+        </ol>
+        <hr>
+    {% endif %}
+    <div id="items">
+        {% if object_list %}
+            <div class="collapse" id="searchCollapse">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input
+                            id="searchInput"
+                            type="text"
+                            class="form-control search"
+                            placeholder="Search for...">
+                    </div>
+                    <div class="col-md-5" id="col-selector">
+                    </div>
+                </div>
+                <hr>
+            </div>
+            {% block list %}
+                <div class="list-group list">
+                    {% for object in object_list %}
+                        <a href="{{ object.get_absolute_url }}" class="list-group-item">
+                            {% block list_object %}
+                                <span class="name">{{ object }}</span>
+                            {% endblock list_object %}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endblock list %}
+
+            {% block list_after %}{% endblock list_after %}
+        {% else %}
+            <center>
+                {% if parent_verbose_name %}
+                    <h3 class="text-muted">
+                        Hmm... This <b>{{ parent_verbose_name }}</b> is empty!
+                    </h3>
+                {% endif %}
+                <a class="text-muted" href="{{ create_url }}">
+                    <h3>create new <b>{{ verbose_name }}</b3></h3>
+                </a>
+            </center>
+        {% endif %}
+    </div>
+
+
+{% endblock content %}
+
+
+{% block scripts %}
+    {{block.super}}
+
+    {% block list_js_options %}{% endblock list_js_options %}
+
+    {% javascript 'product_list' %}
+
+{% endblock scripts %}

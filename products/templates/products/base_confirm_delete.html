@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Delete confirmation' %}
+{% endblock title %}
+
+
+{% block content %}
+    <div class="page-header">
+        <h3>{% trans 'Delete confirmation' %} </h3>
+    </div>
+
+
+    <form method="post">
+        {% csrf_token %}
+        <p class="text-danger">
+            {% blocktrans %}
+                Are you sure you want to delete <b>{{ object }}</b> and related objects too?
+            {% endblocktrans %}
+        </p>
+        <button class="btn btn-danger">{% trans 'Yes' %}</button>
+        <a href="{{ object.get_absolute_url }}" class="btn btn-success">{% trans 'No' %}</a>
+    </form>
+{% endblock content %}

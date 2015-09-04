@@ -1,0 +1,83 @@
+{% extends 'products/base_list.html' %}
+
+{% load i18n %}
+{% load pipeline %}
+
+{% block toolbar %}
+    <a
+        id="close"
+        class="btn btn-{% if parent.is_closed %}warning{% else %}success{% endif %}"
+        href="{% url 'box-toggle-close' parent.pk %}"
+    >
+        <span
+            class="glyphicon glyphicon-{% if parent.is_closed %}share-alt{% else %}check{% endif %}"
+        >
+
+        </span>
+        {% if parent.is_closed %}
+            {% trans 'Reopen' %}
+        {% else %}
+            {% trans 'Close' %}
+        {% endif %}
+    </a>
+    {% if object_list %}
+        <a href="{{ parent.get_export_url }}" class="btn btn-info">
+            <span class="glyphicon glyphicon-hdd"></span>
+            {% trans 'Save as XLSX' %}
+        </a>
+    {% endif %}
+
+    {{ block.super }}
+{% endblock toolbar %}
+
+{% block list %}
+    <table class="table">
+        <thead>
+            <tr>
+                <td>{% trans 'Barcode' %}</td>
+                <td>{% trans 'Name' %}</td>
+                <td>{% trans 'Order' %}</td>
+                <td>{% trans 'Quantity' %}</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody class="list">
+            {% for product in object_list %}
+                <tr>
+                    <td class="barcode">{{ product.barcode }}</td>
+                    <td class="name">{{ product.name }}</td>
+                    <td class="order">{{ product.order }}</td>
+                    <td class="quantity">{{ product.quantity }}</td>
+
+                    <td>
+                        {% if perms.products.change_productpurchase %}
+                            <a href="{{ product.get_edit_url }}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        {% endif %}
+
+                        {% if user.is_superuser %}
+                            <a href="{{ product.get_delete_url }}">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock list %}
+
+
+{% block list_js_options %}
+    <script>
+        var LIST_JS_OPTIONS = {
+            valueNames: [
+                'barcode',
+                'name',
+                'order',
+                'quantity'
+            ]
+        }
+    </script>
+{% endblock list_js_options %}

@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% load i18n %}
+{% load bootstrap %}
+
+{% block title %}
+    {% trans 'Edit' %}
+    {{ object }}
+{% endblock title %}
+
+{% block content %}
+    <div class="page-header">
+        <h3>Edit <b>{{ object }}</b></h3>
+    </div>
+
+    <form action="{% url 'customer-update' object.pk %}" method="post" class="form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label class="control-label">{% trans 'Name' %}</label>
+            <p class="form-control-static">{{ object }}</p>
+        </div>
+
+        {{ form|bootstrap }}
+
+        <button type="submit" class="btn btn-success">
+            {% trans 'Save' %}
+        </button>
+    </form>
+{% endblock content %}

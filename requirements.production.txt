@@ -1,0 +1,6 @@
+-r requirements.development.txt
+
+gunicorn==19.3.0
+#psycopg2==2.6
+django-redis==4.0.0
+redis==2.10.3

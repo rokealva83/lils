@@ -1,0 +1,40 @@
+{% extends 'products/base_list.html' %}
+
+{% load i18n %}
+
+{% block toolbar %}
+    <a href="{% url 'customer-update' parent.pk %}" class="btn btn-default">
+        <span class="glyphicon glyphicon-pencil"></span>
+        {% trans 'Edit' %}
+    </a>
+
+    <a href="{{ parent.get_export_url }}" class="btn btn-info">
+        <span class="glyphicon glyphicon-hdd"></span>
+        {% trans 'Save as XLSX' %}
+    </a>
+
+    {{ block.super }}
+{% endblock toolbar %}
+
+{% block list_object %}
+    {{ block.super }}
+
+    {% if object.is_closed %}
+        <span class="label label-success pull-right status">{% trans 'Ready' %}</span>
+    {% else %}
+        <span class="label label-warning pull-right status">{% trans 'In progress' %}</span>
+    {% endif %}
+{% endblock list_object %}
+
+
+{% block list_js_options %}
+    <script>
+        var LIST_JS_OPTIONS = {
+            valueNames: [
+                'name',
+                'status',
+            ]
+        }
+    </script>
+{% endblock list_js_options %}
+

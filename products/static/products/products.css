@@ -1,0 +1,20 @@
+#toolbar {
+    margin-top: -40px;
+}
+
+input#barcode,
+input#count {
+    text-align: center;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.p-name {
+    color: red;
+}
+
+.p-order {
+    color: green;
+}

@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% load i18n %}
+{% load humanize %}
+
+{% block title %}
+    Logs
+{% endblock title %}
+
+{% block content %}
+    <div class="page-header">
+        <h3>Logs
+            <div class="pull-right">
+                <a href="{% url 'logs_export' %}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-arrow-down"></span>
+                    {% trans 'Load as XLSX' %}
+                </a>
+            </div>
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% for log in logs %}
+            {% with object=log.history_object %}
+                <li class="list-group-item">
+                    <b>
+                        <a href="{{ object.get_history_url }}">
+                            {{ object }}
+                        </a>
+                    </b>
+                    was
+                    <b>{{log.get_history_type_display|lower}}</b>
+                    by
+                    <b>{{log.history_user}}</b>
+
+                    <small class="pull-right">
+                        {{log.history_date|naturaltime}}
+                    </small>
+                </li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

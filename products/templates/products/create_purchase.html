@@ -1,0 +1,115 @@
+{% extends 'products/base_create.html' %}
+
+{% load i18n %}
+{% load pipeline %}
+
+{% block toolbar %}
+    <a href="{{ previous_page }}" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        {% trans 'Back' %}
+    </a>
+{% endblock toolbar %}
+
+{% block body %}
+
+    <div id="container"></div>
+
+    <script>
+        var PRODUCTS = true,
+            PREVIOUS_PAGE = '{{ previous_page }}';
+    </script>
+
+    <script id="product-search" type="text/html">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <input
+                        type="text"
+                        id="barcode"
+                        class="form-control input-lg"
+                        placeholder="{% trans 'Barcode' %}">
+                </div>
+
+                <div id="search-result"></div>
+            </div>
+            <div class="col-md-5">
+                <div id="products-for-save">
+
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="product-table" type="text/html">
+        <% if(products.length) { %>
+            <ul class="list-group">
+                <% for(var i = 0, len = products.length; i < len; ++i) { %>
+                    <li class="list-group-item">
+                        <span class="p-name">
+                            <%= products[i].name %>
+                        </span>
+                        |
+                        <span class="p-order">
+                            <%= products[i].order %>
+                        </span>
+
+                        <span class="badge">
+                            <%= products[i].quantity %>
+                        </span>
+                    </li>
+                <% } %>
+            </ul>
+            <button id="save" class="btn btn-success btn-block">
+                <span class="glyphicon glyphicon-save"></span>
+                Save
+            </button>
+        <% } %>
+
+    </script>
+
+    <script id="product-search-result" type="text/html">
+        <% if(products.length) { %>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>{% trans 'Name' %}</td>
+                        <td>{% trans 'Order' %}</td>
+                        <td>{% trans 'Quantity' %}</td>
+                    </tr>
+                </thead>
+               <tbody>
+
+                        <% for(var i = 0, len = products.length; i < len; ++i) { %>
+
+                            <tr class="clickable"
+                                data-product-id="<%= products[i].id %>">
+
+                                <td><%= products[i].name %></td>
+                                <td><%= products[i].order %></td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        id="count"
+                                        class="form-control input-sm"
+                                        min="0"
+                                        placeholder="{% trans 'Quantity' %}"
+                                        value="<%= products[i].quantity %>"
+                                        data-product-id="<%= products[i].id %>"
+                                    >
+                                </td>
+                            </tr>
+                        <% } %>
+
+                </tbody>
+            </table>
+        <% } %>
+    </script>
+
+{% endblock body %}
+
+
+{% block scripts %}
+    {{ block.super }}
+
+    {% javascript 'purchase_create' %}
+{% endblock scripts %}

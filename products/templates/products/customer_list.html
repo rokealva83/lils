@@ -1,0 +1,88 @@
+{% extends 'products/base_list.html' %}
+
+{% load i18n %}
+
+ {% block list %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <td>
+                    {% trans 'Name' %}
+                </td>
+
+                <td>
+                    {% trans 'Invoice' %}
+                </td>
+
+                <td>
+                    {% trans 'Total weight' %}
+                </td>
+
+                <td>
+                    {% trans 'Status' %}
+                </td>
+            </tr>
+        </thead>
+        <tbody class="list">
+            {% for object in object_list %}
+                <tr data-href="{{ object.get_absolute_url }}">
+                    <td class="name">
+                        {{ object }}
+                    </td>
+
+                    <td class="invoice">
+                        {{ object.invoice }}
+                    </td>
+
+                    <td class="total-weight">
+                        {{ object.total_weight }}
+                    </td>
+
+                    <td class="status">
+                        {% if object.box_set.count %}
+                            {% if object.is_closed %}
+                                <span class="label label-success">{% trans 'Ready' %}</span>
+                            {% else %}
+                                <span class="label label-warning">{% trans 'In progress' %}</span>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock list %}
+
+{% block scripts %}
+    {{ block.super }}
+
+    <script>
+        $(function(){
+            $('.table tr[data-href]').each(function(){
+                $(this).css('cursor','pointer').hover(
+                    function(){
+                        $(this).addClass('active');
+                    },
+                    function(){
+                        $(this).removeClass('active');
+                    }).click( function(){
+                        document.location = $(this).attr('data-href');
+                    }
+                );
+            });
+        });
+    </script>
+{% endblock scripts %}
+
+{% block list_js_options %}
+    <script>
+        var LIST_JS_OPTIONS = {
+            valueNames: [
+                'name',
+                'invoice',
+                'total-weight',
+                'status'
+            ]
+        }
+    </script>
+{% endblock list_js_options %}

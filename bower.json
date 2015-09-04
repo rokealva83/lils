@@ -1,0 +1,21 @@
+{
+  "name": "lils",
+  "version": "0.0.0",
+  "authors": [
+    "Alexander Savchuk <mrxlinch@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "backbone": "~1.2.0",
+    "list.js": "~1.1.1"
+  }
+}

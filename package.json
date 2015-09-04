@@ -1,0 +1,22 @@
+{
+  "name": "lils",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:mr-linch/lils.git"
+  },
+  "author": "Alexander Savchuk",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "bower": "~1.4.1",
+    "cssmin": "~0.4.3",
+    "yuglify": "~0.1.4",
+    "uglifyjs": "~2.4.10"
+  }
+}
