@@ -4,45 +4,66 @@
 
 {% block list %}
     <style>
-        #check_warning, #check_warning:hover, #check_warning:focus, #check_warning:active {
+        a {
+            margin-left: 10px;
+        }
+
+        #check_warning, #check_warning:hover, #check_warning:focus, #check_warning:active, #check_success, #check_success:hover, #check_success:focus, #check_success, #check_success:active {
             text-decoration: none;
             color: #000;
             float: right;
+            height: 30px;
+            line-height: 30px;
+            width: 125px;
+            padding-left: 12px;
+            margin-bottom: 16px;
+            border-radius: 5px;
+        }
+        #check_warning, #check_warning:hover, #check_warning:focus, #check_warning:active {
+            background: #940000;
+        }
+        #check_success, #check_success:hover, #check_success:focus, #check_success, #check_success:active {
+            background: #009444;
         }
     </style>
-    <a id="check_warning" href="javascript:void(0)" class="nonhide">Hide ready process</a><br>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <a type="checkbox" name="browser" value="" id="check_warning" href="javascript:void()" class="nonhide"
+       style="text-decoration: none">Hide process </a>
+    <a type="checkbox" name="browser" value="" id="check_success" href="javascript:void()" class="nonhide"
+       style="text-decoration: none"> Hide ready </a><br>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
             <td>
-                    {% trans 'Name' %}
-                </td>
+                {% trans 'Name' %}
+            </td>
 
             <td>
-                    {% trans 'Invoice' %}
-                </td>
+                {% trans 'Invoice' %}
+            </td>
 
             <td>
-                    {% trans 'Total weight' %}
-                </td>
+                {% trans 'Total weight' %}
+            </td>
 
             <td>
-                    {% trans 'Status' %}
-                </td>
+                {% trans 'Status' %}
+            </td>
         </tr>
         </thead>
         <tbody class="list">
         {% for object in object_list %}
             <tr data-href="{{ object.get_absolute_url }}">
                 <td class="name">
-                        {{ object }}
-                    </td>
+                    {{ object }}
+                </td>
                 <td class="invoice">
-                        {{ object.invoice }}
-                    </td>
+                    {{ object.invoice }}
+                </td>
                 <td class="total-weight">
-                        {{ object.total_weight }}
-                    </td>
+                    {{ object.total_weight }}
+                </td>
                 {% if object.box_set.count %}
                     {% if object.is_closed %}
                         <td class="status success">
@@ -54,10 +75,7 @@
                         </td>
                     {% endif %}
                 {% endif %}
-
-
             </tr>
-
         {% endfor %}
         </tbody>
     </table>
@@ -65,7 +83,6 @@
 
 {% block scripts %}
     {{ block.super }}
-
     <script>
         $(function () {
             $('.table tr[data-href]').each(function () {
@@ -98,7 +115,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#check_warning").on('click', function () {
-                var cl = $(this).attr('class');
+                var cl = $(this).attr('class')
                 if (cl == "nonhide") {
                     $(this).removeClass('nonhide').addClass('hide');
                     $('.warning').parent().css('display', 'none');
@@ -106,6 +123,17 @@
                 else if (cl == "hide") {
                     $(this).removeClass('hide').addClass('nonhide');
                     $('.warning').parent().css('display', '');
+                }
+            });
+            $("#check_success").on('click', function () {
+                var cl = $(this).attr('class')
+                if (cl == "nonhide") {
+                    $(this).removeClass('nonhide').addClass('hide');
+                    $('.success').parent().css('display', 'none');
+                }
+                else if (cl == "hide") {
+                    $(this).removeClass('hide').addClass('nonhide');
+                    $('.success').parent().css('display', '');
                 }
             });
         });
