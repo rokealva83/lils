@@ -29,11 +29,12 @@
         }
     </style>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-
-    <a type="checkbox" name="browser" value="" id="check_warning" href="javascript:void(0)" class="show"
-       style="text-decoration: none">Hide process </a>
-    <a type="checkbox" name="browser" value="" id="check_success" href="javascript:void(0)" class="show"
-       style="text-decoration: none"> Hide ready </a><br>
+    <div class="pull-right">
+        <a type="checkbox" name="browser" value="" id="check_warning" href="javascript:void(0)" class="show"
+           style="text-decoration: none">Hide process </a>
+        <a type="checkbox" name="browser" value="" id="check_success" href="javascript:void(0)" class="show"
+           style="text-decoration: none"> Hide ready </a>
+    </div>
     <table>
         <thead>
         <tr>
@@ -126,7 +127,7 @@
                 }
                 else if (cl == "not_show") {
                     $(this).removeClass('not_show').addClass('show');
-                    $('.warning').parent().css('display', '');
+                    $('.warning').parent().css('display', 'table-row');
                 }
             });
             $("#check_success").on('click', function () {
@@ -137,7 +138,7 @@
                 }
                 else if (cl == "not_show") {
                     $(this).removeClass('not_show').addClass('show');
-                    $('.success').parent().css('display', '');
+                    $('.success').parent().css('display', 'table-row');
                 }
             });
         });
