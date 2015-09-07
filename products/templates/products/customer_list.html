@@ -110,32 +110,32 @@
             ]
         }
     </script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+{#    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>#}
 
-{#    <script type="text/javascript">#}
-{#        $(document).ready(function () {#}
-{#            $("#check_warning").on('click', function () {#}
-{#                var cl = $(this).attr('class')#}
-{#                if (cl == "show") {#}
-{#                    $(this).removeClass('show').addClass('not_show');#}
-{#                    $('.warning').parent().css('display', 'none');#}
-{#                }#}
-{#                else if (cl == "not_show") {#}
-{#                    $(this).removeClass('not_show').addClass('show');#}
-{#                    $('.warning').parent().css('display', 'table-row');#}
-{#                }#}
-{#            });#}
-{#            $("#check_success").on('click', function () {#}
-{#                var cl = $(this).attr('class')#}
-{#                if (cl == "show") {#}
-{#                    $(this).removeClass('show').addClass('not_show');#}
-{#                    $('.success').parent().css('display', 'none');#}
-{#                }#}
-{#                else if (cl == "not_show") {#}
-{#                    $(this).removeClass('not_show').addClass('show');#}
-{#                    $('.success').parent().css('display', 'table-row');#}
-{#                }#}
-{#            });#}
-{#        });#}
-{#    </script>#}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#check_warning").on('click', function () {
+                var cl = $(this).attr('class')
+                if (cl == "show") {
+                    $(this).removeClass('show').addClass('not_show');
+                    $('.warning').parent().css('display', 'none');
+                }
+                else if (cl == "not_show") {
+                    $(this).removeClass('not_show').addClass('show');
+                    $('.warning').parent().css('display', 'table-row');
+                }
+            });
+            $("#check_success").on('click', function () {
+                var cl = $(this).attr('class')
+                if (cl == "show") {
+                    $(this).removeClass('show').addClass('not_show');
+                    $('.success').parent().css('display', 'none');
+                }
+                else if (cl == "not_show") {
+                    $(this).removeClass('not_show').addClass('show');
+                    $('.success').parent().css('display', 'table-row');
+                }
+            });
+        });
+    </script>
 {% endblock list_js_options %}
