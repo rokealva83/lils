@@ -95,21 +95,6 @@
             });
         });
     </script>
-{% endblock scripts %}
-
-{% block list_js_options %}
-    <script>
-        var LIST_JS_OPTIONS = {
-            valueNames: [
-                'name',
-                'invoice',
-                'total-weight',
-                'status'
-            ]
-        }
-    </script>
-{#    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>#}
-
     <script type="text/javascript">
         $(document).ready(function () {
             $("#check_warning").on('click', function () {
@@ -135,5 +120,18 @@
                 }
             });
         });
+    </script>
+{% endblock scripts %}
+
+{% block list_js_options %}
+    <script>
+        var LIST_JS_OPTIONS = {
+            valueNames: [
+                'name',
+                'invoice',
+                'total-weight',
+                'status'
+            ]
+        }
     </script>
 {% endblock list_js_options %}
