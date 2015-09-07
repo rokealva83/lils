@@ -138,19 +138,19 @@
             ]
         }
     </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#check_warning").on('click', function () {
-                var cl = $(this).attr('class');
-                if (cl == "show_element") {
-                    $(this).removeClass('show_element').addClass('hide_element');
-                    $('.warning').parent().css('display', 'none');
-                }
-                else if (cl == "hide_element") {
-                    $(this).removeClass('hide)element').addClass('show_element');
-                    $('.warning').parent().css('display', 'table-row');
-                }
-            });
-        });
-    </script>
+{#    <script type="text/javascript">#}
+{#        $(document).ready(function () {#}
+{#            $("#check_warning").on('click', function () {#}
+{#                var cl = $(this).attr('class');#}
+{#                if (cl == "show_element") {#}
+{#                    $(this).removeClass('show_element').addClass('hide_element');#}
+{#                    $('.warning').parent().css('display', 'none');#}
+{#                }#}
+{#                else if (cl == "hide_element") {#}
+{#                    $(this).removeClass('hide_element').addClass('show_element');#}
+{#                    $('.warning').parent().css('display', 'table-row');#}
+{#                }#}
+{#            });#}
+{#        });#}
+{#    </script>#}
 {% endblock list_js_options %}
