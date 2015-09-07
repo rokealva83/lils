@@ -3,6 +3,10 @@
 {% load i18n %}
 
 {% block list %}
+    <div class="pull-right">
+        <a id="check_warning" href="javascript:void(0)" class="show_element">Hide process</a>
+        <a id="check_success" href="javascript:void(0)" class="show_element">Hide ready</a>
+    </div>
     <style>
         a {
             margin-left: 10px;
