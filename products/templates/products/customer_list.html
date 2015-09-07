@@ -30,56 +30,56 @@
     </style>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
-    <a type="checkbox" name="browser" value="" id="check_warning" href="javascript:void()" class="show"
+    <a type="checkbox" name="browser" value="" id="check_warning" href="javascript:void(0)" class="show"
        style="text-decoration: none">Hide process </a>
-    <a type="checkbox" name="browser" value="" id="check_success" href="javascript:void()" class="show"
+    <a type="checkbox" name="browser" value="" id="check_success" href="javascript:void(0)" class="show"
        style="text-decoration: none"> Hide ready </a><br>
     <table>
-    <thead>
-    <tr>
-        <td>
+        <thead>
+        <tr>
+            <td>
                 {% trans 'Name' %}
             </td>
 
-        <td>
+            <td>
                 {% trans 'Invoice' %}
             </td>
 
-        <td>
+            <td>
                 {% trans 'Total weight' %}
             </td>
 
-        <td>
+            <td>
                 {% trans 'Status' %}
             </td>
-    </tr>
-    </thead>
-    <tbody class="list">
-    {% for object in object_list %}
-        <tr data-href="{{ object.get_absolute_url }}">
-            <td class="name">
+        </tr>
+        </thead>
+        <tbody class="list">
+        {% for object in object_list %}
+            <tr data-href="{{ object.get_absolute_url }}">
+                <td class="name">
                     {{ object }}
                 </td>
-            <td class="invoice">
+                <td class="invoice">
                     {{ object.invoice }}
                 </td>
-            <td class="total-weight">
+                <td class="total-weight">
                     {{ object.total_weight }}
                 </td>
-            {% if object.box_set.count %}
-                {% if object.is_closed %}
-                    <td class="status success">
-                        <span class="label label-success">{% trans 'Ready' %}</span>
-                    </td>
-                {% else %}
-                    <td class="status warning">
-                        <span class="label label-warning">{% trans 'In progress' %}</span>
-                    </td>
+                {% if object.box_set.count %}
+                    {% if object.is_closed %}
+                        <td class="status success">
+                            <span class="label label-success">{% trans 'Ready' %}</span>
+                        </td>
+                    {% else %}
+                        <td class="status warning">
+                            <span class="label label-warning">{% trans 'In progress' %}</span>
+                        </td>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-        </tr>
-    {% endfor %}
-    </tbody>
+            </tr>
+        {% endfor %}
+        </tbody>
     </table>
 {% endblock list %}
 
