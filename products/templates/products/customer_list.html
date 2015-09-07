@@ -21,6 +21,13 @@
 {#        }#}
 {##}
 {#        #check_warning, #check_warning:hover, #check_warning:focus, #check_warning:active {#}
+{#            background: #d99a4a;#}
+{#        }#}
+{##}
+{#        #check_success, #check_success:hover, #check_success:focus, #check_success, #check_success:active {#}
+{#            background: #00C159;#}
+{#        }#}
+{#    </style>#}
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -88,36 +95,36 @@
             });
         });
     </script>
-{#    <script type="text/javascript">#}
-{#        $(document).ready(function () {#}
-{#            $("#check_warning").on('click', function () {#}
-{#                var cl = $(this).attr('class');#}
-{#                if (cl == "show") {#}
-{#                    $(this).removeClass('show').addClass('not_show');#}
-{#                    $('.warning').parent().css('display', 'none');#}
-{#                }#}
-{#                else if (cl == "hide") {#}
-{#                    $(this).removeClass('not_show').addClass('show');#}
-{#                    $('.warning').parent().css('display', 'table-row');#}
-{#                }#}
-{#            });#}
-{#        });#}
-{#    </script>#}
-{#    <script>#}
-{#        $(document).ready(function () {#}
-{#            $("#check_success").on('click', function () {#}
-{#                var cl = $(this).attr('class');#}
-{#                if (cl == "show") {#}
-{#                    $(this).removeClass('show').addClass('not_show');#}
-{#                    $('.success').parent().css('display', 'none');#}
-{#                }#}
-{#                else if (cl == "not_show") {#}
-{#                    $(this).removeClass('not_show').addClass('show');#}
-{#                    $('.success').parent().css('display', 'table-row');#}
-{#                }#}
-{#            });#}
-{#        });#}
-{#    </script>#}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#check_warning").on('click', function () {
+                var cl = $(this).attr('class');
+                if (cl == "show_element") {
+                    $(this).removeClass('show_element').addClass('hide_element');
+                    $('.warning').parent().css('display', 'none');
+                }
+                else if (cl == "hide_element") {
+                    $(this).removeClass('hide_element').addClass('show_element');
+                    $('.warning').parent().css('display', 'table-row');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#check_success").on('click', function () {
+                var cl = $(this).attr('class');
+                if (cl == "show_element") {
+                    $(this).removeClass('show_element').addClass('hide_element');
+                    $('.success').parent().css('display', 'none');
+                }
+                else if (cl == "not_show") {
+                    $(this).removeClass('hide_element').addClass('show_element');
+                    $('.success').parent().css('display', 'table-row');
+                }
+            });
+        });
+    </script>
 {% endblock scripts %}
 
 {% block list_js_options %}
