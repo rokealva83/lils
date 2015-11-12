@@ -64,7 +64,6 @@ class BoxExporter(Exporter):
 
     def _write_product_table_header(self, work_sheet):
         work_sheet.append((
-            'Barcode',
             'Name',
             'Order',
             'Quantity',
@@ -124,8 +123,7 @@ class CustomerExporter(BoxExporter):
         work_sheet = work_book.active
         work_sheet.column_dimensions['A'].width = 35
         work_sheet.column_dimensions['B'].width = 60
-        work_sheet.column_dimensions['C'].width = 25
-        work_sheet.column_dimensions['D'].width = 13
+        work_sheet.column_dimensions['C'].width = 15
         work_sheet.title = 'Boxs'
 
         self._write_customer_title(work_sheet, customer)
